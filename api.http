@@ -1,0 +1,30 @@
+# Get all books
+GET http://localhost:3001/books HTTP/1.1
+Content-Type: application/json
+
+###
+
+# Create a book
+POST http://localhost:3001/books HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "En las montañas de la locura"
+}
+
+###
+
+#Update a book
+PUT http://localhost:3001/books/2 HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "Vida y obra de Lovecraft"
+}
+
+###
+
+#Delete a book
+DELETE  http://localhost:3001/books/3 HTTP/1.1
+Content-Type: application/json
+
