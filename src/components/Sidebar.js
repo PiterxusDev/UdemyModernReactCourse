@@ -6,7 +6,8 @@ function Sidebar(){
         {path: '/accordion', label: 'Accordion'},
         {path: '/', label: 'Dropdown'},
         {path:'/buttons', label: 'Buttons'},
-        {path:'/modal', label: 'Modal'}
+        {path:'/modal', label: 'Modal'},
+        {path:'/table', label: 'Table'}
 
     ]
 
