@@ -2,7 +2,7 @@ import { createContext, useState, useEffect } from "react";
 //Antes
 const NavigationContext = createContext();
 
-function NavigatioProvider ({children}){
+function NavigationProvider ({children}){
     const [currentPath, setCurrentPath] = useState(window.location.pathname)
 
     useEffect(
@@ -14,6 +14,7 @@ function NavigatioProvider ({children}){
 
             return () =>{
                 window.removeEventListener('popstate', handler)
+             
             }
         },[]
     );
@@ -29,5 +30,5 @@ function NavigatioProvider ({children}){
     </NavigationContext.Provider>
 };
 
-export {NavigatioProvider};
+export {NavigationProvider};
 export default NavigationContext;
