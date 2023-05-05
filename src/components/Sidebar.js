@@ -7,7 +7,8 @@ function Sidebar(){
         {path: '/', label: 'Dropdown'},
         {path:'/buttons', label: 'Buttons'},
         {path:'/modal', label: 'Modal'},
-        {path:'/table', label: 'Table'}
+        {path:'/table', label: 'Table'},
+        {path:'/counter', label: 'Counter'},
 
     ]
 

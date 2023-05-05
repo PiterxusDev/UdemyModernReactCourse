@@ -1,32 +1,14 @@
 import Table from "./Table";
-import { useState } from "react";
+import useSort from "../hooks/use-sort";
 import {GoArrowSmallDown,GoArrowSmallUp} from 'react-icons/go';
 
 
 function SortableTable(props) {
-    const [sortOrder, setSortOrder] = useState(null);
-    const [sortBy, setSortBy] = useState(null);
+   
     const { config, data } = props;
+    const {sortedData, setSortColumn, sortOrder, sortBy}= useSort(data, config);
 
-    const handleClick = (label) => {
-        if(sortBy && sortBy !== label){
-            setSortOrder('asc');
-            setSortBy(label);
-            return;
-        }
-
-
-        if (sortOrder === null) {
-            setSortOrder('asc');
-            setSortBy(label);
-        } else if (sortOrder === 'asc') {
-            setSortOrder('desc');
-            setSortBy(label);
-        } else if (sortOrder === 'desc') {
-            setSortOrder(null);
-            setSortBy(null);
-        }
-    }
+ 
 
     const updatedConfig = config.map((column) => {
         const { sortValue } = column;
@@ -35,7 +17,7 @@ function SortableTable(props) {
         }
         return {
             ...column,
-            header: () => <th className="cursor-pointer hover:bg-gray-100"  onClick={() => handleClick(column.label)}>
+            header: () => <th className="cursor-pointer hover:bg-gray-100"  onClick={() => setSortColumn(column.label)}>
                 
              <div className="flex items-center">
                     {getIcons(column.label, sortBy, sortOrder)}
@@ -47,21 +29,7 @@ function SortableTable(props) {
             </th>
         }
     })
-    let sortedData = data;
-    if (sortOrder && sortBy) {
-        const {sortValue }=config.find((column) => column.label === sortBy);
-        sortedData = [...data].sort((a, b) => {
-            const aValue = sortValue(a);
-            const bValue = sortValue(b);
-            const reverseOrder = sortOrder === 'asc' ? 1 : -1;
 
-            if (typeof aValue === 'string') {
-                return aValue.localeCompare(bValue) * reverseOrder;
-            }else{
-                return (aValue - bValue) * reverseOrder;
-            }
-        })
-    }
     return <Table {...props} data={sortedData} config={updatedConfig} />
 }
 
